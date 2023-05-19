@@ -3,7 +3,7 @@
 import { AuthSocialButton } from "@/app/(site)/components/AuthSocialButton";
 import { Button } from "@/app/components/Button";
 import { Input } from "@/app/components/inputs/Input";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FC, useCallback, useEffect, useState } from "react";
@@ -37,7 +37,11 @@ export const AuthForm: FC<IAuthFormProps> = (props) => {
             axios
                 .post("/api/register", data)
                 .then(() => signIn("credentials", data))
-                .catch(() => toast.error("Something went wrong"))
+                .catch((error) => {
+                    console.log(error);
+                    if (isAxiosError(error)) toast.error(error.response?.data);
+                    else toast.error("Something went wrong");
+                })
                 .finally(() => setIsLoading(false));
         }
 
