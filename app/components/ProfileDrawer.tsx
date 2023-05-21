@@ -1,4 +1,5 @@
 import { Avatar } from "@/app/components/Avatar";
+import { AvatarGroup } from "@/app/components/AvatarGroup";
 import { ConfirmModal } from "@/app/conversations/[conversationId]/components/ConfirmModal";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import { IFullConversation } from "@/app/types";
@@ -90,9 +91,17 @@ export const ProfileDrawer: FC<IProfileDrawerProps> = ({
                                             <div className="relative flex-1 px-4 mt-6 sm:px-6">
                                                 <div className="flex flex-col items-center">
                                                     <div className="mb-2">
-                                                        <Avatar
-                                                            user={otherUser}
-                                                        />
+                                                        {data?.isGroup ? (
+                                                            <AvatarGroup
+                                                                users={
+                                                                    data.users
+                                                                }
+                                                            />
+                                                        ) : (
+                                                            <Avatar
+                                                                user={otherUser}
+                                                            />
+                                                        )}
                                                     </div>
                                                     <div className="text-black">
                                                         {title}
@@ -122,6 +131,25 @@ export const ProfileDrawer: FC<IProfileDrawerProps> = ({
 
                                                     <div className="w-full pt-5 pb-5 sm:px-0 sm:pt-0">
                                                         <dl className="px-4 space-y-8 sm:space-y-6 sm:px-6">
+                                                            {data.isGroup && (
+                                                                <div>
+                                                                    <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                                                                        Emails
+                                                                    </dt>
+                                                                    <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                                                                        {data.users
+                                                                            .map(
+                                                                                (
+                                                                                    user
+                                                                                ) =>
+                                                                                    user.email
+                                                                            )
+                                                                            .join(
+                                                                                ", "
+                                                                            )}
+                                                                    </dd>
+                                                                </div>
+                                                            )}
                                                             {!data.isGroup && (
                                                                 <div>
                                                                     <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">

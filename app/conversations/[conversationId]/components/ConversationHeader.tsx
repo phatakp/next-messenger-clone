@@ -1,6 +1,7 @@
 "use client";
 
 import { Avatar } from "@/app/components/Avatar";
+import { AvatarGroup } from "@/app/components/AvatarGroup";
 import { ProfileDrawer } from "@/app/components/ProfileDrawer";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import { IFullConversation } from "@/app/types";
@@ -37,7 +38,11 @@ export const ConversationHeader: FC<IConversationHeaderProps> = ({
                     >
                         <HiChevronLeft size={32} />
                     </Link>
-                    <Avatar user={otherUser} />
+                    {conversation?.isGroup ? (
+                        <AvatarGroup users={conversation?.users} />
+                    ) : (
+                        <Avatar user={otherUser} />
+                    )}
 
                     <div className="flex flex-col">
                         <div className="text-black">

@@ -1,6 +1,6 @@
 import getUsers from "@/app/actions/getUsers";
-import { UsersList } from "@/app/components/UsersList";
 import Sidebar from "@/app/components/sidebar/Sidebar";
+import { UsersList } from "@/app/users/components/UsersList";
 import { FC, ReactNode } from "react";
 
 interface IUsersLayoutProps {

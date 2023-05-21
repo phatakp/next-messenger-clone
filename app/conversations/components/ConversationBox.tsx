@@ -1,4 +1,5 @@
 import { Avatar } from "@/app/components/Avatar";
+import { AvatarGroup } from "@/app/components/AvatarGroup";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import { IFullConversation } from "@/app/types";
 import clsx from "clsx";
@@ -59,7 +60,12 @@ export const ConversationBox: FC<IConversationBoxProps> = ({
             )}
             onClick={handleClick}
         >
-            <Avatar user={otherUser} />
+            {item.isGroup ? (
+                <AvatarGroup users={item.users} />
+            ) : (
+                <Avatar user={otherUser} />
+            )}
+
             <div className="flex-1 min-w-0">
                 <div className="focus:outline-none">
                     <div className="flex items-center justify-between mb-1">

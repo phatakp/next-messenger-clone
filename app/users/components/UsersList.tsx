@@ -1,4 +1,4 @@
-import { UserBox } from "@/app/components/UserBox";
+import { UserBox } from "@/app/users/components/UserBox";
 import { User } from "@prisma/client";
 import { FC } from "react";
 
